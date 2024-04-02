@@ -1,0 +1,22 @@
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.imbalanced_learn import RandomOverSampler
+
+# Generate a sample dataset with an imbalanced class distribution
+X, y = make_classification(n_samples=1000, n_classes=3, n_informative=5, n_redundant=0, n_clusters_per_class=1)
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Scale the data using StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Oversample the minority class using RandomOverSampler
+ros = RandomOverSampler(random_state=42)
+X_train_oversampled, y_train_oversampled = ros.fit_resample(X_train_scaled, y_train)
+
+# Split the oversampled data into training and validation sets
+X_train_oversampled, X_val_oversampled, y_train_oversampled, y_val_oversampled = train_test_split(X_train_oversampled, y_train_oversampled, test_size=0.2, random_state=42)
