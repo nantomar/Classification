@@ -1,3 +1,5 @@
+# (Synthetic Minority Over-sampling Technique)
+
 import numpy as np
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
@@ -21,8 +23,4 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 print("\nClass distribution in the resampled training set:")
 print(np.unique(y_train_resampled, return_counts=True))
 
-Class distribution in the training set:
-(array([0, 1, 2]), array([640, 80, 80]))
 
-Class distribution in the resampled training set:
-(array([0, 1, 2]), array([640, 640, 640]))
